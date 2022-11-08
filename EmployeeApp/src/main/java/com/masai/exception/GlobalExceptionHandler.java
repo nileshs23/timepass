@@ -14,13 +14,12 @@ import org.springframework.web.context.request.WebRequest;
 public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<MyErrorDetails> myMNVHandler(MethodArgumentNotValidException me){
+	public ResponseEntity<MyErrorDetails> myMNVEHandler(MethodArgumentNotValidException me){
 		
 		
 		MyErrorDetails err = new MyErrorDetails();
 		err.setTimestamp(LocalDateTime.now());;
 		err.setMessage("Validation Error !");
-		err.setStatusCode(401);
 		err.setDescription(me.getBindingResult().getFieldError().getDefaultMessage() );
 		
 		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);

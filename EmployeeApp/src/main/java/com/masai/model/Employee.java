@@ -15,15 +15,15 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer empId;
 	
-	@Size(min=3, max=10)
+	@Size(min=3, max=10,message = "Name must be in between 3 and 10 characters")
 	private String empName;
 	
-	@NotNull
+	@NotNull(message = "Salary Cannot Be Null !")
 	private Integer salary;
 	private String address;
 	
-	@NotNull
-	@Email
+	@NotNull(message = "Email is Mandatory.")
+	@Email(message = "Provide Email Address only")
 	private String email;
 	
 	private String mobile;

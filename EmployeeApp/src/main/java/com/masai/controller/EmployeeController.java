@@ -1,5 +1,9 @@
 package com.masai.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +32,7 @@ public class EmployeeController {
 //	CRUD OPERATIONS USING JPA
 	
 	@PostMapping("/employees")
-	public ResponseEntity<Employee> registerEmployeeHandler(@RequestBody Employee emp){
+	public ResponseEntity<Employee> registerEmployeeHandler(@Valid @RequestBody Employee emp){
 		
 		Employee savedObj = empService.registerEmployee(emp);
 		
@@ -36,10 +40,26 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/employees/{empId}")
-	public ResponseEntity<Employee> getEmployeeByIdHandler(@PathVariable("empId") Integer empID) throws EmployeeException{
+	public ResponseEntity<Employee> getEmployeeByIdHandler(@Valid @PathVariable("empId") Integer empID) throws EmployeeException{
 		
 		Employee emp = empService.getEmployeeById(empID);
 		return new ResponseEntity<Employee>(emp,HttpStatus.OK);
+	}
+	
+	@GetMapping("/employees")
+	public ResponseEntity<List<Employee>> getAllEmployeeHandler() throws EmployeeException{
+		
+		List<Employee> emps = empService.getAllEmployeeDetails();
+		
+		return new ResponseEntity<List<Employee>>(emps,HttpStatus.OK);
+	}
+	
+	@GetMapping("/byAddress/{addr}")
+	public ResponseEntity<List<Employee>> getAllEmployeeByAddressHandler(@PathVariable("addr") String address) throws EmployeeException{
+		
+		List<Employee> emps = empService.getEmployeeDetailsByAddress(address);
+		
+		return new ResponseEntity<List<Employee>>(emps,HttpStatus.OK);
 	}
 	
 	
