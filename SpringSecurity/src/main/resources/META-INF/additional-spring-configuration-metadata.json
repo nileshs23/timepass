@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "masai.app.jwtCookieName",
+  "type": "java.lang.String",
+  "description": "This is JWT Cookie Name."
+}]}
